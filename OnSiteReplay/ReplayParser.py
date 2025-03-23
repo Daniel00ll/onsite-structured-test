@@ -37,7 +37,11 @@ class ReplayParser():
         open0_tree = ET.parse(file_dir)
         open0 = open0_tree.getroot()
         car_elements = open0.findall('.//Vehicle[@vehicleCategory="car"]')
-        bicycle_elements = open0.findall('.//Vehicle[@vehicleCategory="bicycle"]')
+
+        #获取自行车元素，兼容城中村场景
+        all_vehicles = open0.findall('.//Vehicle')  # 获取所有 Vehicle 元素
+        bicycle_elements = [v for v in all_vehicles if v.get('vehicleCategory') in ['motorbike', 'bicycle']]
+
         pedestrian_elements = open0.findall('.//Pedestrian[@pedestrianCategory="pedestrian"]')
         car_num = 0
         bicycle_num = 0

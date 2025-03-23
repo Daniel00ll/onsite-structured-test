@@ -6,7 +6,7 @@ FRAGMENT:
 SERIAL:
   tasks:
   dt: 0.1
-  maxTestTime: 200
+  maxTestTime: 3600
   skipExist: True
 
 REPLAY:

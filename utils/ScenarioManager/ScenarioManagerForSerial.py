@@ -22,9 +22,12 @@ class ScenarioManagerForSerial(ScenarioManagerBase):
                 else:
                     print(f"[LOAD SCENARIO ERROR]: Cannot find task {task}, please check the task name and retry!")
         else:
-            for task_name in os.listdir(self.task_dir):
-                if not task_name.startswith('.') and task_name.endswith('.json'):
-                    self.tasks.append(task_name.split('.json')[0])
+            try:
+                for task_name in os.listdir(self.task_dir):
+                    if not task_name.startswith('.') and task_name.endswith('.json'):
+                        self.tasks.append(task_name.split('.json')[0])
+            except FileNotFoundError:
+                pass
         self.tot_scene_num = len(self.tasks)
   
     def _struct_scene_info(self):

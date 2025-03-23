@@ -274,8 +274,9 @@ class MySimulatorBase(QObject, PyCustomerSimulator):
 						targetLocation = location
 						break
 
-			laneObj = targetLocation.pLaneObject
-			pIVehicle.vehicleDriving().move(laneObj, targetLocation.distToStart)
+			if targetLocation:
+				laneObj = targetLocation.pLaneObject
+				pIVehicle.vehicleDriving().move(laneObj, targetLocation.distToStart)
 
 	def _updateShadowEgo(self, simuiface: SimuInterface, netiface: NetInterface):
 		if self.ego_id:

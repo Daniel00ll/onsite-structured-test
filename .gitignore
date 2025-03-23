@@ -6,6 +6,7 @@
 /build
 /testBin
 /dist
+
 WorkSpace/
 *__pycache__
 
