@@ -1,20 +1,44 @@
-/.idea
-/.run
-/Backup
-/venv
-/pyds
-/build
-/testBin
-/dist
+# IDE 相关
+.idea/
+.vscode/
+.run/
 
+# 编译/构建相关
+build/
+dist/
+testBin/
+Backup/
+outputs/
+Temp/
+
+# 项目工作区
 WorkSpace/
-*__pycache__
+TessNG/WorkSpace/
 
-# 输出文件
-/outputs/*
-# 临时文件
-/Temp/*
-# Tess运行相关文件
-/TessNG/WorkSpace/*
+# 虚拟环境
+venv/
+env/
+pyds/
+.conda/
+*.conda
+*.env
 
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 单元测试 & Jupyter
+.cache/
+.ipynb_checkpoints/
+coverage.xml
+*.cover
+
+# 日志/临时
+*.log
+*.tmp
 *cache.json
+
+# 系统文件
+*.DS_Store
+Thumbs.db
