@@ -112,14 +112,44 @@ class ReplayInfo():
 
     def _get_dt_maxt(self):
         """
-        该函数实现得到最大仿真时长阈值以及采样率的功能
+        该函数实现得到最大仿真时长阈值以及采样率的功能。
+        计算 vehicle_traj、bicycle_traj 和 pedestrian_traj 中的最大时间 max_t，
+        并取时间步差值 dt。
         """
         max_t = 0
-        for i in self.vehicle_traj.keys():
-            t_i = list(self.vehicle_traj[i].keys())
-            max_t_i = float(t_i[-1])
-            if max_t_i > max_t:
-                max_t = max_t_i
+        t_i = []
 
+        # 检查 vehicle_traj 中的时间步
+        for i in self.vehicle_traj.keys():
+            traj_times = list(self.vehicle_traj[i].keys())
+            if len(traj_times) >= 2:
+                max_t_i = float(traj_times[-1])
+                if max_t_i > max_t:
+                    max_t = max_t_i
+                    t_i = traj_times
+
+        # 检查 bicycle_traj 中的时间步
+        for i in self.bicycle_traj.keys():
+            traj_times = list(self.bicycle_traj[i].keys())
+            if len(traj_times) >= 2:
+                max_t_i = float(traj_times[-1])
+                if max_t_i > max_t:
+                    max_t = max_t_i
+                    t_i = traj_times
+
+        # 检查 pedestrian_traj 中的时间步
+        for i in self.pedestrian_traj.keys():
+            traj_times = list(self.pedestrian_traj[i].keys())
+            if len(traj_times) >= 2:
+                max_t_i = float(traj_times[-1])
+                if max_t_i > max_t:
+                    max_t = max_t_i
+                    t_i = traj_times
+
+        # 检查是否找到有效的时间步
+        if not t_i or len(t_i) < 2:
+            raise ValueError("Not enough time steps in vehicle_traj, bicycle_traj, or pedestrian_traj to calculate dt.")
+
+        # 计算 dt 和 max_t
         dt = np.around(float(t_i[-1]) - float(t_i[-2]), 3)
         self.add_settings(dt=dt, max_t=max_t)
